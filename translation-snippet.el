@@ -7,6 +7,17 @@
  (message (concat "Translated to \"" dest-lang "\"."))
  )
 
+;; gets the romanji for japanese phrase
+(defun translate-to-ja-pron ()
+  (interactive)
+  (insert (shell-command-to-string
+	   (concat "translate --dest ja --pron \"" (current-kill 0) "\"")
+	   )
+	  )
+  (message "ja pronunciation yanked.")
+  )
+
+(global-set-key "\C-c\C-j" 'translate-to-ja-pron)
 
 ;; creates a macro for generation translation functions
 (defmacro translate-to (dest-lang)

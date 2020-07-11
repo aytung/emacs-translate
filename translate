@@ -14,6 +14,8 @@ def main():
         help='The source language you want to translate. (Default: auto)')
     parser.add_argument('-c', '--detect', action='store_true', default=False,
         help='')
+    parser.add_argument('-p','--pron', default=False, action='store_true', help='Show pronunciation instead')
+
     args = parser.parse_args()
     translator = Translator()
 
@@ -34,9 +36,10 @@ def main():
     # [pron.] {pronunciation}
     #     """.strip().format(src=result.src, dest=result.dest, original=result.origin,
     #                   text=result.text, pronunciation=result.pronunciation)
-    
-    
-    print(result.text)
+    if args.pron:
+        print(result.pronunciation)
+    else:
+        print(result.text)
 
 if __name__ == '__main__':
     main()
